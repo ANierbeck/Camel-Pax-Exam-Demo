@@ -1,0 +1,15 @@
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0" xmlns:cm="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.0.0"
+    xmlns:ext="http://aries.apache.org/blueprint/xmlns/blueprint-ext/v1.0.0" xmlns:amq="http://activemq.apache.org/schema/core">
+
+
+    <bean id="connectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+        <property name="brokerURL" value="vm://localhost?broker.persistent=false" />
+    </bean>
+
+    <service interface="javax.jms.ConnectionFactory" ref="connectionFactory" />
+
+<!--     <bean id="activemq" class="org.apache.activemq.camel.component.ActiveMQComponent"> -->
+<!--         <property name="connectionFactory" ref="connectionFactory" /> -->
+<!--     </bean> -->
+
+</blueprint>

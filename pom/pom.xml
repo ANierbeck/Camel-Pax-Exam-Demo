@@ -1,0 +1,666 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>de.nierbeck.camel.exam</groupId>
+        <artifactId>demo</artifactId>
+        <version>0.1.0-SNAPSHOT</version>
+    </parent>
+    <groupId>de.nierbeck.camel.exam.demo</groupId>
+    <artifactId>pom</artifactId>
+    <packaging>pom</packaging>
+    <name>Master-Pom</name>
+    <description>The Master Pom module for all other submodules</description>
+    <properties>
+        <dependency.camel.version>2.10.2</dependency.camel.version>
+        <dependency.activemq.version>5.7.0</dependency.activemq.version>
+        <dependency.slf4j.version>1.6.1</dependency.slf4j.version>
+        <dependency.log4j.version>1.2.14</dependency.log4j.version>
+        <dependency.commons-io.version>2.3</dependency.commons-io.version>
+        <dependency.commons-beanutils.version>1.8.3</dependency.commons-beanutils.version>
+        <dependency.commons-collections.version>3.2.1</dependency.commons-collections.version>
+        <dependency.cxf.version>2.6.3</dependency.cxf.version>
+        <dependecy.commons-dbcp.version>1.4</dependecy.commons-dbcp.version>
+        <dependency.openjpa.version>2.2.0</dependency.openjpa.version>
+        <dependency.aries-jpa.version>0.3</dependency.aries-jpa.version>
+        <dependency.aries-proxy.version>0.3.1</dependency.aries-proxy.version>
+
+        <dependency.commons-io.version>2.3</dependency.commons-io.version>
+        <dependency.commons-beanutils.version>1.8.3</dependency.commons-beanutils.version>
+        <dependency.commons-collections.version>3.2.1</dependency.commons-collections.version>
+        <dependency.commons-dbcp.version>1.4</dependency.commons-dbcp.version>
+        <dependency.commons-lang.version>2.4</dependency.commons-lang.version>
+        <dependency.commons-pool.version>1.5.4</dependency.commons-pool.version>
+
+        <dependency.geronimo-jpa.version>1.1</dependency.geronimo-jpa.version>
+        <dependency.geronimo-jms.version>1.1.1</dependency.geronimo-jms.version>
+        <dependency.bval.version>0.2-incubating</dependency.bval.version>
+        <dependency.asm.version>3.3.1_1</dependency.asm.version>
+        <dependency.serp.version>1.13.1_4</dependency.serp.version>
+        <dependency.cglib.version>2.2_2</dependency.cglib.version>
+        <dependency.springframework.version>3.0.7.RELEASE</dependency.springframework.version>
+        <dependency.commonslogging.version>1.1.1</dependency.commonslogging.version>
+
+        <!-- extra plugin versions -->
+        <dependency.openjpa-plugin.version>1.2</dependency.openjpa-plugin.version>
+
+        <!-- test dependencies -->
+        <dependency.junit.version>4.11</dependency.junit.version>
+
+        <dependency.plexusUtilsPluginsVersion>3.0.7</dependency.plexusUtilsPluginsVersion>
+        <dependency.h2.version>1.3.167</dependency.h2.version>
+        <dependency.osgi.version>4.3.1</dependency.osgi.version>
+
+        <!-- pax-exam dependencies -->
+        <dependency.pax-exam.version>2.6.0</dependency.pax-exam.version>
+        <dependency.osgi.version>4.3.1</dependency.osgi.version>
+        <dependency.felix.version>3.2.2</dependency.felix.version>
+        <dependency.javax-inject.version>1_2</dependency.javax-inject.version>
+        <dependency.paxurl.version>1.4.2</dependency.paxurl.version>
+        <dependency.pax-runner.version>1.7.4</dependency.pax-runner.version>
+        <dependency.logback.version>0.9.29</dependency.logback.version>
+        <dependency.pax-swissbox.version>1.6.0</dependency.pax-swissbox.version>
+        <dependency.ops4j-base.version>1.4.0</dependency.ops4j-base.version>
+        <dependency.geronimo-inject.version>1.0</dependency.geronimo-inject.version>
+        <dependency.karaf.version>2.2.9</dependency.karaf.version>
+        <dependency.karaf-tooling.version>2.3.1</dependency.karaf-tooling.version>
+        <dependency.pax-loggin.version>1.6.9</dependency.pax-loggin.version>
+        
+        <dependency.hamcrest.version>1.3.0.1</dependency.hamcrest.version>
+    </properties>
+
+    <!-- dependencies for all modules -->
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${dependency.junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.ops4j.pax.tipi</groupId>
+            <artifactId>org.ops4j.pax.tipi.hamcrest.core</artifactId>
+            <version>${dependency.hamcrest.version}</version>
+        </dependency>
+    </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- submodules dependencies -->
+            <dependency>
+                <groupId>de.tecdoc.datacombination</groupId>
+                <artifactId>controle</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>de.tecdoc.datacombination</groupId>
+                <artifactId>entity-commons</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <!-- dependencies for camel -->
+            <dependency>
+                <groupId>org.apache.camel</groupId>
+                <artifactId>camel-core</artifactId>
+                <version>${dependency.camel.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.camel</groupId>
+                <artifactId>camel-core-osgi</artifactId>
+                <version>${dependency.camel.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.camel</groupId>
+                <artifactId>camel-core-xml</artifactId>
+                <version>${dependency.camel.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.camel</groupId>
+                <artifactId>camel-blueprint</artifactId>
+                <version>${dependency.camel.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.camel</groupId>
+                <artifactId>camel-jms</artifactId>
+                <version>${dependency.camel.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.camel</groupId>
+                <artifactId>camel-velocity</artifactId>
+                <version>${dependency.camel.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.camel</groupId>
+                <artifactId>camel-mvel</artifactId>
+                <version>${dependency.camel.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.camel</groupId>
+                <artifactId>camel-jdbc</artifactId>
+                <version>${dependency.camel.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.camel</groupId>
+                <artifactId>camel-mail</artifactId>
+                <version>${dependency.camel.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.camel</groupId>
+                <artifactId>camel-cxf</artifactId>
+                <version>${dependency.camel.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.camel</groupId>
+                <artifactId>camel-http</artifactId>
+                <version>${dependency.camel.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.camel</groupId>
+                <artifactId>camel-jpa</artifactId>
+                <version>${dependency.camel.version}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <!-- camel test dependencies -->
+            <dependency>
+                <groupId>org.apache.camel</groupId>
+                <artifactId>camel-test</artifactId>
+                <version>${dependency.camel.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.camel</groupId>
+                <artifactId>camel-test-blueprint</artifactId>
+                <version>${dependency.camel.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <!-- dependencies for activemq -->
+            <dependency>
+                <groupId>org.apache.activemq</groupId>
+                <artifactId>activemq</artifactId>
+                <version>${dependency.activemq.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.activemq</groupId>
+                <artifactId>activemq-core</artifactId>
+                <version>${dependency.activemq.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.activemq</groupId>
+                <artifactId>activemq-blueprint</artifactId>
+                <version>${dependency.activemq.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.activemq</groupId>
+                <artifactId>activemq-camel</artifactId>
+                <version>${dependency.activemq.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.activemq</groupId>
+                <artifactId>activemq-pool</artifactId>
+                <version>${dependency.activemq.version}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <!-- commons modules -->
+            <dependency>
+                <groupId>commons-beanutils</groupId>
+                <artifactId>commons-beanutils</artifactId>
+                <version>${dependency.commons-beanutils.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>commons-collections</groupId>
+                <artifactId>commons-collections</artifactId>
+                <version>${dependency.commons-collections.version}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <!-- dependencies for logging -->
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${dependency.slf4j.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-log4j12</artifactId>
+                <version>${dependency.slf4j.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>jcl-over-slf4j</artifactId>
+                <version>${dependency.slf4j.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>log4j</groupId>
+                <artifactId>log4j</artifactId>
+                <version>${dependency.log4j.version}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <!-- dependency for Camel feature -->
+            <dependency>
+                <groupId>org.apache.camel.karaf</groupId>
+                <artifactId>apache-camel</artifactId>
+                <version>${dependency.camel.version}</version>
+                <type>xml</type>
+                <classifier>features</classifier>
+                <scope>provided</scope>
+            </dependency>
+
+            <!-- Test database H2 -->
+            <dependency>
+                <groupId>com.h2database</groupId>
+                <artifactId>h2</artifactId>
+                <version>${dependency.h2.version}</version>
+                <scope>test</scope>
+            </dependency>
+            
+            <!-- DBCP -->
+            <dependency>
+                <groupId>commons-dbcp</groupId>
+                <artifactId>commons-dbcp</artifactId>
+                <version>${dependecy.commons-dbcp.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+
+            <!-- OSGi dependencies -->
+            <dependency>
+                <groupId>org.osgi</groupId>
+                <artifactId>org.osgi.core</artifactId>
+                <version>${dependency.osgi.version}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.osgi</groupId>
+                <artifactId>org.osgi.compendium</artifactId>
+                <version>${dependency.osgi.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <!-- dependencies for cxf -->
+            <dependency>
+                <groupId>org.apache.cxf</groupId>
+                <artifactId>cxf-rt</artifactId>
+                <type>bundle</type>
+                <version>${dependency.cxf.version}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <!-- OpenJPA dependency -->
+            <dependency>
+                <groupId>org.apache.openjpa</groupId>
+                <artifactId>openjpa</artifactId>
+                <version>${dependency.openjpa.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.geronimo.specs</groupId>
+                <artifactId>geronimo-jms_1.1_spec</artifactId>
+                <version>${dependency.geronimo-jms.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.geronimo.specs</groupId>
+                <artifactId>geronimo-jta_1.1_spec</artifactId>
+                <version>${dependency.geronimo-jms.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.geronimo.specs</groupId>
+                <artifactId>geronimo-jpa_2.0_spec</artifactId>
+                <version>${dependency.geronimo-jpa.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.geronimo.specs</groupId>
+                <artifactId>geronimo-validation_1.0_spec</artifactId>
+                <version>${dependency.geronimo-jpa.version}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>commons-lang</groupId>
+                <artifactId>commons-lang</artifactId>
+                <version>${dependency.commons-lang.version}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>commons-pool</groupId>
+                <artifactId>commons-pool</artifactId>
+                <version>${dependency.commons-pool.version}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.servicemix.bundles</groupId>
+                <artifactId>org.apache.servicemix.bundles.asm</artifactId>
+                <version>${dependency.asm.version}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.servicemix.bundles</groupId>
+                <artifactId>org.apache.servicemix.bundles.serp</artifactId>
+                <version>${dependency.serp.version}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.ops4j.pax.logging</groupId>
+                <artifactId>pax-logging-service</artifactId>
+                <version>${dependency.pax-loggin.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <!-- Pax Exam Dependencies -->
+            <dependency>
+                <groupId>org.ops4j.pax.exam</groupId>
+                <artifactId>pax-exam</artifactId>
+                <version>${dependency.pax-exam.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.ops4j.pax.exam</groupId>
+                <artifactId>pax-exam-spi</artifactId>
+                <version>${dependency.pax-exam.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.ops4j.pax.exam</groupId>
+                <artifactId>pax-exam-container-remote</artifactId>
+                <version>${dependency.pax-exam.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.ops4j.pax.exam</groupId>
+                <artifactId>pax-exam-container-rbc</artifactId>
+                <version>${dependency.pax-exam.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.ops4j.pax.exam</groupId>
+                <artifactId>pax-exam-container-rbc-client</artifactId>
+                <version>${dependency.pax-exam.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.ops4j.pax.exam</groupId>
+                <artifactId>pax-exam-invoker-junit</artifactId>
+                <version>${dependency.pax-exam.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.ops4j.pax.exam</groupId>
+                <artifactId>pax-exam-container-native</artifactId>
+                <version>${dependency.pax-exam.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.ops4j.pax.exam</groupId>
+                <artifactId>pax-exam-link-mvn</artifactId>
+                <version>${dependency.pax-exam.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.ops4j.pax.url</groupId>
+                <artifactId>pax-url-aether</artifactId>
+                <version>${dependency.paxurl.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.ops4j.pax.exam</groupId>
+                <artifactId>pax-exam-testforge</artifactId>
+                <version>${dependency.pax-exam.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>org.apache.felix.framework</artifactId>
+                <version>${dependency.felix.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.ops4j.pax.exam</groupId>
+                <artifactId>pax-exam-link-assembly</artifactId>
+                <version>${dependency.pax-exam.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.ops4j.pax.runner</groupId>
+                <artifactId>pax-runner-no-jcl</artifactId>
+                <version>${dependency.pax-runner.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.servicemix.bundles</groupId>
+                <artifactId>org.apache.servicemix.bundles.javax-inject</artifactId>
+                <version>${dependency.javax-inject.version}</version>
+            </dependency>
+
+            <!-- For sane logging -->
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-core</artifactId>
+                <version>${dependency.logback.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-classic</artifactId>
+                <version>${dependency.logback.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>jul-to-slf4j</artifactId>
+                <version>${dependency.slf4j.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <!-- extra pax-exam dependencies -->
+            <dependency>
+                <groupId>org.ops4j.pax.swissbox</groupId>
+                <artifactId>pax-swissbox-lifecycle</artifactId>
+                <version>${dependency.pax-swissbox.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.ops4j.pax.swissbox</groupId>
+                <artifactId>pax-swissbox-framework</artifactId>
+                <version>${dependency.pax-swissbox.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.ops4j.pax.swissbox</groupId>
+                <artifactId>pax-swissbox-extender</artifactId>
+                <version>${dependency.pax-swissbox.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.ops4j.pax.swissbox</groupId>
+                <artifactId>pax-swissbox-core</artifactId>
+                <version>${dependency.pax-swissbox.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.ops4j.pax.exam</groupId>
+                <artifactId>pax-exam-extender-service</artifactId>
+                <version>${dependency.pax-exam.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.ops4j.base</groupId>
+                <artifactId>ops4j-base</artifactId>
+                <version>${dependency.ops4j-base.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.geronimo.specs</groupId>
+                <artifactId>geronimo-atinject_1.0_spec</artifactId>
+                <version>${dependency.geronimo-inject.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.ops4j.pax.tipi</groupId>
+                <artifactId>org.ops4j.pax.tipi.junit</artifactId>
+                <version>${dependency.junit.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+
+            <!-- Pax-Exam-Karaf Testsetup -->
+            <dependency>
+                <groupId>org.apache.karaf.tooling.exam</groupId>
+                <artifactId>org.apache.karaf.tooling.exam.container</artifactId>
+                <version>${dependency.karaf-tooling.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.ops4j.pax.exam</groupId>
+                <artifactId>pax-exam-junit4</artifactId>
+                <version>${dependency.pax-exam.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.ops4j.pax.exam</groupId>
+                <artifactId>pax-exam-inject</artifactId>
+                <version>${dependency.pax-exam.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.karaf.tooling.exam</groupId>
+                <artifactId>org.apache.karaf.tooling.exam.options</artifactId>
+                <version>${dependency.karaf-tooling.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.karaf</groupId>
+                <artifactId>apache-karaf</artifactId>
+                <version>${dependency.karaf.version}</version>
+                <type>zip</type>
+                <scope>test</scope>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.apache.karaf.shell</groupId>
+                        <artifactId>org.apache.karaf.shell.dev</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.apache.karaf</groupId>
+                        <artifactId>org.apache.karaf.client</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <artifactId>osgi</artifactId>
+                        <groupId>org.eclipse</groupId>
+                    </exclusion>
+                    <exclusion>
+                        <artifactId>org.apache.felix.framework</artifactId>
+                        <groupId>org.apache.felix</groupId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.activemq</groupId>
+                <artifactId>activemq-karaf</artifactId>
+                <version>${dependency.activemq.version}</version>
+                <scope>test</scope>
+                <type>xml</type>
+                <classifier>features</classifier>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.cxf.karaf</groupId>
+                <artifactId>apache-cxf</artifactId>
+                <version>${dependency.cxf.version}</version>
+                <scope>test</scope>
+                <type>xml</type>
+                <classifier>features</classifier>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.karaf.assemblies.features</groupId>
+                <artifactId>standard</artifactId>
+                <version>${dependency.karaf.version}</version>
+                <scope>test</scope>
+                <type>xml</type>
+                <classifier>features</classifier>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.karaf.assemblies.features</groupId>
+                <artifactId>enterprise</artifactId>
+                <version>${dependency.karaf.version}</version>
+                <scope>test</scope>
+                <type>xml</type>
+                <classifier>features</classifier>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <forkMode>always</forkMode>
+                </configuration>
+            </plugin>
+        </plugins>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.felix</groupId>
+                    <artifactId>maven-bundle-plugin</artifactId>
+                    <version>2.3.7</version>
+                    <extensions>true</extensions>
+                    <inherited>true</inherited>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>2.12.3</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+</project>

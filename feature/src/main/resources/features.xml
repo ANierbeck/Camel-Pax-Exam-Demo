@@ -1,0 +1,35 @@
+<features name="Camel-Demo" xmlns="http://karaf.apache.org/xmlns/features/v1.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://karaf.apache.org/xmlns/features/v1.0.0 http://karaf.apache.org/xmlns/features/v1.0.0">
+    <repository>mvn:org.apache.camel.karaf/apache-camel/${dependency.camel.version}/xml/features</repository>
+    <repository>mvn:org.apache.activemq/activemq-karaf/${dependency.activemq.version}/xml/features</repository>
+    <repository>mvn:org.apache.cxf.karaf/apache-cxf/${dependency.cxf.version}/xml/features</repository>
+
+    <feature name='camel-exam-demo' version="${project.version}" resolver="(obr)">
+
+        <!-- depending activemq features -->
+        <feature version="${dependency.activemq.version}">activemq-blueprint</feature>
+        <feature version="${dependency.activemq.version}">activemq-camel</feature>
+
+        <!-- depending cxf features -->
+        <feature version="${dependency.cxf.version}">cxf-jaxws</feature>
+
+        <!-- Container dependencies -->
+        <feature version="${dependency.aries-proxy.version}">transaction</feature>
+        <feature version="${dependency.aries-jpa.version}">jpa</feature>
+        <feature version="${dependency.aries-jpa.version}">jndi</feature>
+
+        <!-- depending camel features -->
+        <feature version="${dependency.camel.version}">camel-blueprint</feature>
+        <feature version="${dependency.camel.version}">camel-jms</feature>
+        <feature version="${dependency.camel.version}">camel-jpa</feature>
+        <feature version="${dependency.camel.version}">camel-jdbc</feature>
+        <feature version="${dependency.camel.version}">camel-mvel</feature>
+        <feature version="${dependency.camel.version}">camel-cxf</feature>
+
+        <bundle dependency="true">mvn:com.h2database/h2/${dependency.h2.version}</bundle>
+        
+        <bundle>mvn:${project.groupId}/route-control/${project.version}</bundle>
+        <bundle>mvn:${project.groupId}/entities/${project.version}</bundle>
+    </feature>
+</features>

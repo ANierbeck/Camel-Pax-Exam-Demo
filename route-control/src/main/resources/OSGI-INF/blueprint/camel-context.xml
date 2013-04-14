@@ -1,0 +1,41 @@
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:camel="http://camel.apache.org/schema/blueprint" xmlns:jpa="http://aries.apache.org/xmlns/jpa/v1.0.0"
+    xmlns:tx="http://aries.apache.org/xmlns/transactions/v1.0.0" xmlns:cm="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0"
+    xmlns:camelcxf="http://camel.apache.org/schema/blueprint/cxf"
+    xsi:schemaLocation="http://www.osgi.org/xmlns/blueprint/v1.0.0
+           http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd
+           http://camel.apache.org/schema/blueprint/camel-blueprint.xsd
+           http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0
+           http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0/blueprint-cm-1.0.0.xsd
+           http://cxf.apache.org/blueprint/jaxws http://cxf.apache.org/schemas/blueprint/jaxws.xsd
+           http://cxf.apache.org/blueprint/core http://cxf.apache.org/schemas/blueprint/core.xsd">
+           
+    <camelcxf:cxfEndpoint id="messageService" address="/camel-test/contol"
+        serviceClass="de.nierbeck.camel.exam.demo.control.WebServiceOrder" wsdlURL="wsdl/WebServiceOrder.wsdl" >
+        <camelcxf:properties>
+            <entry key="dataFormat" value="POJO" />
+        </camelcxf:properties>
+    </camelcxf:cxfEndpoint>
+
+    <reference id="entityManagerFactory" interface="javax.persistence.EntityManagerFactory"/>
+    <reference id="jtaTransactionManager" interface="javax.transaction.TransactionManager"/>
+
+    <bean id="transactionManager" class="org.springframework.transaction.jta.JtaTransactionManager">
+        <argument ref="jtaTransactionManager"/>
+    </bean>
+
+    
+    <bean id="jpa" class="org.apache.camel.component.jpa.JpaComponent">
+        <property name="entityManagerFactory" ref="entityManagerFactory" />
+        <property name="transactionManager" ref="transactionManager" />
+    </bean>
+    
+    <bean id="orderWebService"
+        class="de.nierbeck.camel.exam.demo.control.internal.OrderWebServiceRoute">
+    </bean>
+
+    <camelContext trace="true" id="route-control" xmlns="http://camel.apache.org/schema/blueprint">
+        <routeBuilder ref="orderWebService" />
+    </camelContext>
+    
+</blueprint>
