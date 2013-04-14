@@ -122,7 +122,7 @@ public class KarafRoutingTest extends CamelTestSupport {
 				scanFeatures(
 						maven().groupId("org.apache.camel.karaf").artifactId("apache-camel").type("xml")
 								.classifier("features").versionAsInProject(), "camel-blueprint", "camel-jms",
-						"camel-jpa", "camel-jdbc", "camel-cxf", "camel-test").start(),
+						"camel-jpa", "camel-mvel", "camel-jdbc", "camel-cxf", "camel-test").start(),
 				logLevel(LogLevel.INFO),
 				KarafDistributionOption.editConfigurationFilePut("etc/org.ops4j.pax.url.mvn.cfg",
 						"org.ops4j.pax.url.mvn.proxySupport", "true"),
@@ -156,11 +156,11 @@ public class KarafRoutingTest extends CamelTestSupport {
 												.toURL())
 								.add("OSGI-INF/blueprint/jms-context.xml",
 										new File("src/main/resources/OSGI-INF/blueprint/jms-config.xml").toURL())
-								.add("wsdl/OrderDataMerging.wsdl",
-										new File("target/generated/wsdl/OrderDataMerging.wsdl").toURL())
+								.add("wsdl/WebServiceOrder.wsdl",
+										new File("target/generated/wsdl/WebServiceOrder.wsdl").toURL())
 								.set(Constants.BUNDLE_SYMBOLICNAME, "de.nierbeck.camel.exam.demo.route-control")
 								.set(Constants.DYNAMICIMPORT_PACKAGE, "*")
-								.set(Constants.EXPORT_PACKAGE, "de.nierbeck.camel.exam.demo.control").build())
+								.set(Constants.EXPORT_PACKAGE, "wsdl, de.nierbeck.camel.exam.demo.control").build())
 						.start() };
 	}
 
@@ -186,10 +186,10 @@ public class KarafRoutingTest extends CamelTestSupport {
 
 	@Override
 	protected void doPreSetup() throws Exception {
-		controlContext = getOsgiService(CamelContext.class, "(camel.context.name=datacombination-control)", 10000);
+		controlContext = getOsgiService(CamelContext.class, "(camel.context.name=route-control)", 10000);
 		assertNotNull(controlContext);
 
-		testContext = getOsgiService(CamelContext.class, "(camel.context.name=datacombination-test)", 10000);
+		testContext = getOsgiService(CamelContext.class, "(camel.context.name=route-test)", 10000);
 		assertNotNull(testContext);
 
 		for (CamelMessage orderMerging : orderMergingDao.findAll()) {

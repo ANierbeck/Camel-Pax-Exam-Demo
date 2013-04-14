@@ -6,7 +6,7 @@
     version="2.0" >
 	<persistence-unit name="camelStore" transaction-type="JTA">
 		<provider>org.apache.openjpa.persistence.PersistenceProviderImpl</provider>
-        <jta-data-source>osgi:service/javax.sql.DataSource/(osgi.jndi.service.name=jdbc/storeDs)</jta-data-source>
+        <jta-data-source>osgi:service/javax.sql.DataSource/(osgi.jndi.service.name=jdbc/route-test-ds)</jta-data-source>
 
 		<class>de.nierbeck.camel.exam.demo.entities.CamelMessage</class>
 		
