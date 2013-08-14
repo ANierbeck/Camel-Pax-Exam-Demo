@@ -15,9 +15,9 @@
         <feature version="${dependency.cxf.version}">cxf-jaxws</feature>
 
         <!-- Container dependencies -->
-        <feature version="${dependency.aries-proxy.version}">transaction</feature>
-        <feature version="${dependency.aries-jpa.version}">jpa</feature>
-        <feature version="${dependency.aries-jpa.version}">jndi</feature>
+        <feature>transaction</feature>
+        <feature>jpa</feature>
+        <feature>jndi</feature>
 
         <!-- depending camel features -->
         <feature version="${dependency.camel.version}">camel-blueprint</feature>

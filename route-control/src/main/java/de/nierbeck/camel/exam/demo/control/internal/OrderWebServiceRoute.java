@@ -19,16 +19,16 @@ public class OrderWebServiceRoute extends RouteBuilder{
 		
 		from("cxf:bean:messageService").routeId(RouteID.WEB_SERVICE_ORDER)
 		.log(LoggingLevel.DEBUG, "Incoming Request: ${body}")
-		.setBody(simple("${body[0]}"))//JPA Component for logging needed....
+		.setBody(simple("${body[0]}"))
 		.setHeader("MessageId").mvel("exchangeId")
-//		.wireTap("direct:logMessage")
+		.wireTap("direct:logMessage")
 		.to("activemq:queue:"+ JmsDestinations.QUEUE_MESSAGE_STORE+"?disableReplyTo=true")
 		.setExchangePattern(ExchangePattern.InOut)
 		.process(new OutMessageProcessor());
 
 		from("direct:logMessage").routeId(RouteID.LOG_ORDER)
 			.process(new MessageLogConverter())
-			.to("jpa:de.tecdoc.datacombination.entities.OrderMerging");
+			.to("jpa:de.nierbeck.camel.exam.demo.entities.CamelMessage");
 	}
 
 	/**

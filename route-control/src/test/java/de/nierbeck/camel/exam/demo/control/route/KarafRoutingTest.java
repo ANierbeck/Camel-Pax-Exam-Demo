@@ -1,12 +1,12 @@
 package de.nierbeck.camel.exam.demo.control.route;
 
-import static org.apache.karaf.tooling.exam.options.KarafDistributionOption.karafDistributionConfiguration;
-import static org.apache.karaf.tooling.exam.options.KarafDistributionOption.keepRuntimeFolder;
-import static org.apache.karaf.tooling.exam.options.KarafDistributionOption.logLevel;
 import static org.ops4j.pax.exam.CoreOptions.maven;
 import static org.ops4j.pax.exam.CoreOptions.mavenBundle;
-import static org.ops4j.pax.exam.CoreOptions.scanFeatures;
 import static org.ops4j.pax.exam.CoreOptions.streamBundle;
+import static org.ops4j.pax.exam.karaf.options.KarafDistributionOption.features;
+import static org.ops4j.pax.exam.karaf.options.KarafDistributionOption.karafDistributionConfiguration;
+import static org.ops4j.pax.exam.karaf.options.KarafDistributionOption.keepRuntimeFolder;
+import static org.ops4j.pax.exam.karaf.options.KarafDistributionOption.logLevel;
 import static org.ops4j.pax.tinybundles.core.TinyBundles.bundle;
 
 import java.io.ByteArrayOutputStream;
@@ -33,17 +33,15 @@ import org.apache.camel.test.junit4.CamelTestSupport;
 import org.apache.felix.service.command.CommandProcessor;
 import org.apache.felix.service.command.CommandSession;
 import org.apache.karaf.features.FeaturesService;
-import org.apache.karaf.tooling.exam.options.KarafDistributionOption;
-import org.apache.karaf.tooling.exam.options.LogLevelOption.LogLevel;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.ops4j.pax.exam.Configuration;
 import org.ops4j.pax.exam.Option;
+import org.ops4j.pax.exam.ProbeBuilder;
 import org.ops4j.pax.exam.TestProbeBuilder;
-import org.ops4j.pax.exam.junit.Configuration;
-import org.ops4j.pax.exam.junit.ExamReactorStrategy;
-import org.ops4j.pax.exam.junit.JUnit4TestRunner;
-import org.ops4j.pax.exam.junit.ProbeBuilder;
-import org.ops4j.pax.exam.spi.reactors.AllConfinedStagedReactorFactory;
+import org.ops4j.pax.exam.junit.PaxExam;
+import org.ops4j.pax.exam.karaf.options.KarafDistributionOption;
+import org.ops4j.pax.exam.karaf.options.LogLevelOption.LogLevel;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.Constants;
 import org.osgi.framework.Filter;
@@ -58,7 +56,6 @@ import de.nierbeck.camel.exam.demo.control.CamelMessageBean;
 import de.nierbeck.camel.exam.demo.control.JmsDestinations;
 import de.nierbeck.camel.exam.demo.control.RouteID;
 import de.nierbeck.camel.exam.demo.control.WebServiceOrder;
-import de.nierbeck.camel.exam.demo.control.WebServiceOrderImpl;
 import de.nierbeck.camel.exam.demo.control.internal.OrderWebServiceRoute;
 import de.nierbeck.camel.exam.demo.control.internal.OutMessageProcessor;
 import de.nierbeck.camel.exam.demo.control.internal.converter.MessageLogConverter;
@@ -66,9 +63,7 @@ import de.nierbeck.camel.exam.demo.entities.CamelMessage;
 import de.nierbeck.camel.exam.demo.entities.dao.CamelMessageStoreDao;
 import de.nierbeck.camel.exam.demo.testutil.TestUtility;
 
-@RunWith(JUnit4TestRunner.class)
-//@ExamReactorStrategy(EagerSingleStagedReactorFactory.class)
-@ExamReactorStrategy(AllConfinedStagedReactorFactory.class)
+@RunWith(PaxExam.class)
 public class KarafRoutingTest extends CamelTestSupport {
 
 	protected transient Logger log = LoggerFactory.getLogger(getClass());
@@ -106,24 +101,26 @@ public class KarafRoutingTest extends CamelTestSupport {
 								maven().groupId("org.apache.karaf").artifactId("apache-karaf").type("zip")
 										.versionAsInProject()).useDeployFolder(false).karafVersion("2.2.9")
 						.unpackDirectory(new File("target/paxexam/unpack/")),
-				scanFeatures(
+				
+				logLevel(LogLevel.WARN),
+				
+				features(
 						maven().groupId("org.apache.karaf.assemblies.features").artifactId("standard").type("xml")
-								.classifier("features").versionAsInProject(), "http-whiteboard").start(),
-				scanFeatures(
+								.classifier("features").versionAsInProject(), "http-whiteboard"),
+				features(
 						maven().groupId("org.apache.karaf.assemblies.features").artifactId("enterprise").type("xml")
-								.classifier("features").versionAsInProject(), "transaction", "jpa", "jndi").start(),
-				scanFeatures(
+								.classifier("features").versionAsInProject(), "transaction", "jpa", "jndi"),
+				features(
 						maven().groupId("org.apache.activemq").artifactId("activemq-karaf").type("xml")
-								.classifier("features").versionAsInProject(), "activemq-blueprint", "activemq-camel")
-						.start(),
-				scanFeatures(
+								.classifier("features").versionAsInProject(), "activemq-blueprint", "activemq-camel"),
+				features(
 						maven().groupId("org.apache.cxf.karaf").artifactId("apache-cxf").type("xml")
-								.classifier("features").versionAsInProject(), "cxf-jaxws").start(),
-				scanFeatures(
+								.classifier("features").versionAsInProject(), "cxf-jaxws"),
+				features(
 						maven().groupId("org.apache.camel.karaf").artifactId("apache-camel").type("xml")
 								.classifier("features").versionAsInProject(), "camel-blueprint", "camel-jms",
-						"camel-jpa", "camel-mvel", "camel-jdbc", "camel-cxf", "camel-test").start(),
-				logLevel(LogLevel.INFO),
+						"camel-jpa", "camel-mvel", "camel-jdbc", "camel-cxf", "camel-test"),
+				
 				KarafDistributionOption.editConfigurationFilePut("etc/org.ops4j.pax.url.mvn.cfg",
 						"org.ops4j.pax.url.mvn.proxySupport", "true"),
 				keepRuntimeFolder(),
@@ -146,7 +143,6 @@ public class KarafRoutingTest extends CamelTestSupport {
 						bundle().add(JmsDestinations.class)
 								.add(WebServiceOrder.class)
 								.add(CamelMessageBean.class)
-								.add(WebServiceOrderImpl.class)
 								.add(RouteID.class)
 								.add(OrderWebServiceRoute.class)
 								.add(OutMessageProcessor.class)
@@ -238,30 +234,6 @@ public class KarafRoutingTest extends CamelTestSupport {
 		});
 
 		mockEndpoint.assertIsSatisfied(2500);
-		
-		/*
-		Exchange exchange = mockEndpoint.getReceivedExchanges().get(0);
-		Map mockBody = exchange.getIn().getBody(Map.class);
-		assertNotNull(mockBody);
-
-		assertEquals(body.getMessage(), mockBody.get(OrderConverter.BRANDID));
-		assertEquals(body.getInputDir(), mockBody.get(OrderConverter.INPUTDIR));
-		assertEquals(body.getSender(), mockBody.get(OrderConverter.SENDER));
-		assertEquals(body.getTmstampAcceptance(), mockBody.get(OrderConverter.TMSTMP));
-		assertNotNull(mockBody.get(OrderConverter.ORDERID));
-
-		mockEndpoint.reset();
-
-		long countAll = orderMergingDao.countAll();
-		int c = 0;
-		while (countAll == 0 && c < 5) {
-			Thread.sleep(500);
-			countAll = orderMergingDao.countAll();
-			c++;
-		}
-		
-		assertTrue(orderMergingDao.countAll() > 0);
-		*/
 
 	}
 

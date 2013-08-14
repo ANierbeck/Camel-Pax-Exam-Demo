@@ -33,6 +33,8 @@
     <bean id="orderWebService"
         class="de.nierbeck.camel.exam.demo.control.internal.OrderWebServiceRoute">
     </bean>
+    
+    <reference id="dao" interface="de.nierbeck.camel.exam.demo.entities.dao.CamelMessageStoreDao" />
 
     <camelContext trace="true" id="route-control" xmlns="http://camel.apache.org/schema/blueprint">
         <routeBuilder ref="orderWebService" />
