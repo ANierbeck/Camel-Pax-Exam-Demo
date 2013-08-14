@@ -99,7 +99,7 @@ public class KarafRoutingTest extends CamelTestSupport {
 				karafDistributionConfiguration()
 						.frameworkUrl(
 								maven().groupId("org.apache.karaf").artifactId("apache-karaf").type("zip")
-										.versionAsInProject()).useDeployFolder(false).karafVersion("2.2.9")
+										.versionAsInProject()).useDeployFolder(false).karafVersion("2.2.11")
 						.unpackDirectory(new File("target/paxexam/unpack/")),
 				
 				logLevel(LogLevel.WARN),
