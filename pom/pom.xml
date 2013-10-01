@@ -52,7 +52,7 @@
 		<dependency.osgi.version>4.3.1</dependency.osgi.version>
 
 		<!-- pax-exam dependencies -->
-		<dependency.pax-exam.version>3.2.0</dependency.pax-exam.version>
+		<dependency.pax-exam.version>3.3.0</dependency.pax-exam.version>
 		<dependency.osgi.version>4.3.1</dependency.osgi.version>
 		<dependency.felix.version>3.2.2</dependency.felix.version>
 		<dependency.javax-inject.version>1_2</dependency.javax-inject.version>
