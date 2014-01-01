@@ -102,7 +102,7 @@ public class KarafRoutingTest extends CamelTestSupport {
 										.versionAsInProject()).useDeployFolder(false).karafVersion("3.0.0")
 						.unpackDirectory(new File("target/paxexam/unpack/")),
 				
-				logLevel(LogLevel.INFO),
+				logLevel(LogLevel.WARN),
 				
 				features(
 						maven().groupId("org.apache.karaf.features").artifactId("standard").type("xml")
