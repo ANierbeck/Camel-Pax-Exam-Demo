@@ -99,16 +99,16 @@ public class KarafRoutingTest extends CamelTestSupport {
 				karafDistributionConfiguration()
 						.frameworkUrl(
 								maven().groupId("org.apache.karaf").artifactId("apache-karaf").type("zip")
-										.versionAsInProject()).useDeployFolder(false).karafVersion("2.2.11")
+										.versionAsInProject()).useDeployFolder(false).karafVersion("3.0.0")
 						.unpackDirectory(new File("target/paxexam/unpack/")),
 				
-				logLevel(LogLevel.WARN),
+				logLevel(LogLevel.INFO),
 				
 				features(
-						maven().groupId("org.apache.karaf.assemblies.features").artifactId("standard").type("xml")
+						maven().groupId("org.apache.karaf.features").artifactId("standard").type("xml")
 								.classifier("features").versionAsInProject(), "http-whiteboard"),
 				features(
-						maven().groupId("org.apache.karaf.assemblies.features").artifactId("enterprise").type("xml")
+						maven().groupId("org.apache.karaf.features").artifactId("enterprise").type("xml")
 								.classifier("features").versionAsInProject(), "transaction", "jpa", "jndi"),
 				features(
 						maven().groupId("org.apache.activemq").artifactId("activemq-karaf").type("xml")

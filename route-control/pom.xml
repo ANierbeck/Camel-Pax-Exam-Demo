@@ -91,12 +91,6 @@
 			<artifactId>activemq-pool</artifactId>
 		</dependency>
 
-		<dependency>
-			<groupId>org.apache.activemq</groupId>
-			<artifactId>activemq-core</artifactId>
-			<scope>test</scope>
-		</dependency>
-
 		<!-- test-db -->
 		<dependency>
 			<groupId>com.h2database</groupId>
@@ -224,11 +218,6 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.apache.karaf.tooling.exam</groupId>
-			<artifactId>org.apache.karaf.tooling.exam.options</artifactId>
-		</dependency>
-
-		<dependency>
 			<groupId>org.apache.karaf</groupId>
 			<artifactId>apache-karaf</artifactId>
 			<type>zip</type>
@@ -254,13 +243,13 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.apache.karaf.assemblies.features</groupId>
+			<groupId>org.apache.karaf.features</groupId>
 			<artifactId>standard</artifactId>
 			<type>xml</type>
 			<classifier>features</classifier>
 		</dependency>
 		<dependency>
-			<groupId>org.apache.karaf.assemblies.features</groupId>
+			<groupId>org.apache.karaf.features</groupId>
 			<artifactId>enterprise</artifactId>
 			<type>xml</type>
 			<classifier>features</classifier>

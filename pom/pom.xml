@@ -12,8 +12,8 @@
 	<name>Master-Pom</name>
 	<description>The Master Pom module for all other submodules</description>
 	<properties>
-		<dependency.camel.version>2.10.4</dependency.camel.version>
-		<dependency.activemq.version>5.7.0</dependency.activemq.version>
+		<dependency.camel.version>2.12.2</dependency.camel.version>
+		<dependency.activemq.version>5.9.0</dependency.activemq.version>
 		<dependency.slf4j.version>1.6.1</dependency.slf4j.version>
 		<dependency.log4j.version>1.2.14</dependency.log4j.version>
 		<dependency.commons-io.version>2.3</dependency.commons-io.version>
@@ -52,7 +52,7 @@
 		<dependency.osgi.version>4.3.1</dependency.osgi.version>
 
 		<!-- pax-exam dependencies -->
-		<dependency.pax-exam.version>3.3.0</dependency.pax-exam.version>
+		<dependency.pax-exam.version>3.4.0</dependency.pax-exam.version>
 		<dependency.osgi.version>4.3.1</dependency.osgi.version>
 		<dependency.felix.version>3.2.2</dependency.felix.version>
 		<dependency.javax-inject.version>1_2</dependency.javax-inject.version>
@@ -62,8 +62,7 @@
 		<dependency.pax-swissbox.version>1.6.0</dependency.pax-swissbox.version>
 		<dependency.ops4j-base.version>1.4.0</dependency.ops4j-base.version>
 		<dependency.geronimo-inject.version>1.0</dependency.geronimo-inject.version>
-		<dependency.karaf.version>2.2.11</dependency.karaf.version>
-		<dependency.karaf-tooling.version>2.3.1</dependency.karaf-tooling.version>
+		<dependency.karaf.version>3.0.0</dependency.karaf.version>
 		<dependency.pax-loggin.version>1.6.9</dependency.pax-loggin.version>
 
 		<dependency.hamcrest.version>1.3.0.1</dependency.hamcrest.version>
@@ -190,12 +189,6 @@
 			<dependency>
 				<groupId>org.apache.activemq</groupId>
 				<artifactId>activemq</artifactId>
-				<version>${dependency.activemq.version}</version>
-				<scope>provided</scope>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.activemq</groupId>
-				<artifactId>activemq-core</artifactId>
 				<version>${dependency.activemq.version}</version>
 				<scope>provided</scope>
 			</dependency>
@@ -562,12 +555,6 @@
 				<artifactId>pax-exam-inject</artifactId>
 				<version>${dependency.pax-exam.version}</version>
 			</dependency>
-			<dependency>
-				<groupId>org.apache.karaf.tooling.exam</groupId>
-				<artifactId>org.apache.karaf.tooling.exam.options</artifactId>
-				<version>${dependency.karaf-tooling.version}</version>
-				<scope>test</scope>
-			</dependency>
 
 			<dependency>
 				<groupId>org.apache.karaf</groupId>
@@ -613,7 +600,7 @@
 			</dependency>
 
 			<dependency>
-				<groupId>org.apache.karaf.assemblies.features</groupId>
+				<groupId>org.apache.karaf.features</groupId>
 				<artifactId>standard</artifactId>
 				<version>${dependency.karaf.version}</version>
 				<scope>test</scope>
@@ -621,7 +608,7 @@
 				<classifier>features</classifier>
 			</dependency>
 			<dependency>
-				<groupId>org.apache.karaf.assemblies.features</groupId>
+				<groupId>org.apache.karaf.features</groupId>
 				<artifactId>enterprise</artifactId>
 				<version>${dependency.karaf.version}</version>
 				<scope>test</scope>
