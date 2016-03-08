@@ -18,7 +18,7 @@
 		<dependency.log4j.version>1.2.14</dependency.log4j.version>
 		<dependency.commons-io.version>2.3</dependency.commons-io.version>
 		<dependency.commons-beanutils.version>1.8.3</dependency.commons-beanutils.version>
-		<dependency.commons-collections.version>3.2.1</dependency.commons-collections.version>
+		<dependency.commons-collections.version>3.2.2</dependency.commons-collections.version>
 		<dependency.cxf.version>2.6.3</dependency.cxf.version>
 		<dependecy.commons-dbcp.version>1.4</dependecy.commons-dbcp.version>
 		<dependency.openjpa.version>2.2.0</dependency.openjpa.version>
